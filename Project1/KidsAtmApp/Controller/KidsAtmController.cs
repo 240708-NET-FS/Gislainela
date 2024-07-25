@@ -1,12 +1,13 @@
 using KidsAtmApp.Repository;
 using KidsAtmApp.Entities;
-
+using KidsAtmApp.Helpers;
 namespace KidsAtmApp.Controller{
 
 public class KidsAtmController
 {
     public void Run()
-    {
+    {   
+        while(true){
         Console.Clear();
         Console.WriteLine("****************     KIDS ATM APP MENUE   ************************");
         Console.WriteLine("  |                                                              |");
@@ -22,32 +23,29 @@ public class KidsAtmController
      switch(userInput)
      {
         case "1":
+        AtmHelpers.AddAccount();
         break;
         case "2":
+        AtmHelpers.ViewAccount();
         break;
         case "3":
+        AtmHelpers.UpdateAccount();
         break;
         case "4":
+        AtmHelpers.DeleteAccount();
         break;
         case  "5":
+        AtmHelpers.LogOut();
         break;
         default: 
+        Console.WriteLine("Invalid Input..Press any key to continue."); //any other key default.
+        Console.ReadLine();
         break;
      }
+        }
 
     }
+  
 }
 
 } 
-/*string name = Console.ReadLine();
-       using(var context = new ApplicationDbContext())
-        {
-
-             var user = new UserAccount{FirstName = "gigi", LastName = "kirk", AccountNUmber = 123456, CardDigits=433443, CardPin=123123, AccountBalance=20.00m }; 
-             // context.UserAccount.Add(user);
-             // context.SaveChanges();
-    
-         /*   var transaction = new Transaction{ Description = " deposit",TranctionAmount = 30.00};
-           
-            context.Transaction.Add(transaction);
-            context.SaveChanges();*/
