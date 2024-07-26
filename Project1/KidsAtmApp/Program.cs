@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using KidsAtmApp.Controller;
 using KidsAtmApp.Service;
+using KidsAtmApp.Helpers;
 
-namespace KidsAtmApp.Services{
+
 
 class Program
 {
@@ -23,10 +24,23 @@ class Program
                                   .AddScoped<KidsAtmService>()
                                   .AddScoped<KidsAtmController>()
                                   .BuildServiceProvider();
-      
+      var KidsAtmService = ServiceProvider.GetService<KidsAtmService>();
+      Console.WriteLine($"this is a test ; {KidsAtmService}");
+      if(KidsAtmService != null)
+      {
+        try{
+           AtmHelpers.Initialize(KidsAtmService);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+
+        }
+      }
+    
+
        var app   = ServiceProvider.GetService<KidsAtmController>();
        app.Run();
 
            }
-}
 }

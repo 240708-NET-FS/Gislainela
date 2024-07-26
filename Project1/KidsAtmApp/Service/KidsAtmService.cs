@@ -1,10 +1,47 @@
 using KidsAtmApp.Repository;
 using KidsAtmApp.Entities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace KidsAtmApp.Service{
 
 public class KidsAtmService
 {
+    private readonly KidsAtmRepository repository;
+    public KidsAtmService(KidsAtmRepository kidsAtmRepository)
+    {
+        repository  = kidsAtmRepository;
 
+    }
+  public bool  IsEmptyOrNullString(string input)
+  {  
+     
+     if(string.IsNullOrEmpty(input))
+     {
+        throw new ArgumentException("Input can not be Null.");
+        
+     }
+     return true;
+  }
+
+  public bool IsValidPin(string input)
+  {
+    //Check if the input is a valid integer
+   if (!int.TryParse(input, out int number))   
+   {            
+   throw new ArgumentException("Input must be a valid integer.", nameof(input));        
+   } 
+// Check if the integer has exactly 6 digits
+   if(input.Length != 6 || number < 100000 || number > 999999) 
+   { 
+    throw new ArgumentException("Input must be a 6-digit integer.", nameof(input));
+   }
+   return true;
+  }
+
+  public void AddAccount(UserAccount userAccount)
+  {
+    repository.AddAccount(userAccount);
+    
+  }
 }
 }

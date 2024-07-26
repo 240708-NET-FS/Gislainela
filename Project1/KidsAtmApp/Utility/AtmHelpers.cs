@@ -1,13 +1,68 @@
+using KidsAtmApp.Service;
+
 namespace KidsAtmApp.Helpers{
 public static class AtmHelpers
 {
+    private static KidsAtmService service;
+   
+   
+   public static void Initialize(KidsAtmService  kidsAtmService)
+   {
+     service = kidsAtmService;
+   }
+
+    public static void PressAnyKey()
+    {
+      Console.WriteLine("Press Any key to Continue...");
+      Console.ReadLine();
+    }
     public static void AddAccount()
     {
+       Console.WriteLine("Enter your First Name:");
+       var FName = Console.ReadLine();
 
+      try
+      {
+        service.IsEmptyOrNullString(FName);
+      }
+      catch(Exception e)
+      {
+       Console.WriteLine(e.Message);
+       PressAnyKey();
+       return ;
+      }
+      
+      Console.WriteLine("Enter your Last Name: ");
+      var LName = Console.ReadLine();
+      try{
+        service.IsEmptyOrNullString(LName);
+      }
+      catch(Exception e)
+      {
+       Console.WriteLine(e.Message);
+       PressAnyKey();
+       return;
+      }
+
+      Console.WriteLine("Enter your PIN:");
+      var Pin = Console.ReadLine();
+      
+      try
+      {
+        service.IsValidPin(Pin);
+
+      }
+      catch(Exception e)
+      {
+       Console.WriteLine(e.Message);
+       PressAnyKey();
+       return;
+      }
     }
   
     public static void ViewAccount()
    {
+
 
    }
 
