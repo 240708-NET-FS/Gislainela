@@ -53,13 +53,13 @@ public class KidsAtmController
         Console.ReadLine();
         break;
      }
-        }
+  }
  
-    }
+}
  
  
     //Methods for menu
-        private void PressAnyKey()
+    private void PressAnyKey()
     {
       Console.WriteLine("Press Any key to Continue...");
       Console.ReadLine();
@@ -107,15 +107,29 @@ public class KidsAtmController
        return;
       }
  
-UserAccount user = new UserAccount {FirstName = FName, LastName = LName};
+      UserAccount user = new UserAccount {FirstName = FName, LastName = LName};
       service.AddAccount(user);
     }
  
-    private void ViewAccount()
-   {
- 
- 
-   }
+    public void ViewAccount() //view
+    {
+      try{
+          var accounts = service.GetAllAccounts();
+          foreach(var account in accounts)
+          {
+          Console.WriteLine($" First Name : {account.FirstName} Last Name:  {account.LastName} AccountId : {account.UserAccountId}" );
+          
+        
+          }
+        
+    }
+    catch(InvalidOperationException ex){
+      Console.WriteLine(ex.Message);
+    }
+      
+      Console.ReadLine();
+
+    }
  
    private void UpdateAccount()
    {
