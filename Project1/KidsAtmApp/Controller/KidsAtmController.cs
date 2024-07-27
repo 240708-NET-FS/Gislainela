@@ -17,7 +17,8 @@ public class KidsAtmController
     }
     public void Run()
     {  
-        while(true){
+        while(true)
+        {
         Console.Clear();
         Console.WriteLine("****************     KIDS ATM APP MENUE   ************************");
         Console.WriteLine("  |                                                              |");
@@ -52,10 +53,10 @@ public class KidsAtmController
         Console.WriteLine("Invalid Input..Press any key to continue."); //any other key default.
         Console.ReadLine();
         break;
-     }
-  }
+      }
+       }
  
-}
+    }
  
  
     //Methods for menu
@@ -106,45 +107,110 @@ public class KidsAtmController
        PressAnyKey();
        return;
       }
- 
+     
       UserAccount user = new UserAccount {FirstName = FName, LastName = LName};
       service.AddAccount(user);
+    
+      
     }
  
-    public void ViewAccount() //view
+    public void ViewAccount() //view by GetAllAccounts
     {
       try{
           var accounts = service.GetAllAccounts();
           foreach(var account in accounts)
           {
-          Console.WriteLine($" First Name : {account.FirstName} Last Name:  {account.LastName} AccountId : {account.UserAccountId}" );
+          Console.WriteLine($" First Name : {account.FirstName} Last Name:  {account.LastName} Account Id : {account.UserAccountId} " );
           
         
           }
         
-    }
-    catch(InvalidOperationException ex){
-      Console.WriteLine(ex.Message);
-    }
+      }
+      catch(InvalidOperationException ex){
+           Console.WriteLine(ex.Message);
+         }
       
-      Console.ReadLine();
+         Console.ReadLine(); //keep going...
 
     }
+    
+    /// <summary>
+    /// Get user account by ID using method GetUserAccountById ..
+    /// </summary>
+    
+    private void UpdateAccount() //update by id
+    {
+      Console.WriteLine("Enter the Account Id You want to update:");
+        if(int.TryParse(Console.ReadLine(), out int accountid))
+        {
+          try
+          {
+            var account = service.GetUserAccountByID(accountid);
+            Console.WriteLine($"This is the Current First and Last Name we have on File: ");
+            Console.WriteLine($" First Name: {account.FirstName} Last Name: {account.LastName}");
+            Console.WriteLine();
+            Console.WriteLine("Enter the Information you want to update.");
+            Console.WriteLine("Enter new First Name:");
+            var firstn = Console.ReadLine();
+            Console.WriteLine("Enter your Last Name:");
+            var lastn = Console.ReadLine();
+           // var updateInfo = Console.ReadLine();
+            
+            account.FirstName = firstn;
+            account.LastName = lastn; //if does not work check his text validation
+            //Console.ReadLine();
+            try{
+              service.UpdateAccount(account);
+              Console.WriteLine("First and Last Name successfully updated.");
+
+            }
+            catch(ArgumentException e)
+            {
+              Console.WriteLine(e.Message);
+            }
+            Console.ReadLine();
+            
+          }catch(KeyNotFoundException e)
+          {
+            Console.WriteLine(e.Message);
+          }
+
+        }else
+          {
+            Console.WriteLine("Please, enter a valid number.");
+          }
+
+
+    }
+             
+    private void DeleteAccount()
+    {
+      Console.WriteLine("Please, enter the Account Id you want to delete: ");
+      if(int.TryParse(Console.ReadLine(), out int accountid))
+      {
+        try
+        {
+          service.DeleteAccount(accountid);
+          Console.WriteLine($"You deleted:This account was successfully deleted.");
+  
+        }
+        catch(KeyNotFoundException e){
+          Console.WriteLine(e.Message);
+        }
+        Console.ReadLine();
+
+      }
+      else{
+        Console.WriteLine("You did not entered a valid input...Operation Cancelled!.");
+      }       
+       
+    }
  
-   private void UpdateAccount()
+   private void LogOut()
    {
- 
-   }
-   private void DeleteAccount()
-  {
- 
-  }
- 
-private void LogOut()
-  {
     Environment.Exit(0);
  
-  }
+   }
  
  
 }

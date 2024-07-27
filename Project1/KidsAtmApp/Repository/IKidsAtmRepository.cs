@@ -9,6 +9,7 @@ namespace KidsAtmApp.Repository{
       List<UserAccount>GetAllAccounts();
       UserAccount? GetUserAccountByID(int id);
       public void UpdateAccount(UserAccount userAccount);
+      public void DeleteAccount(int id);
 
  
 

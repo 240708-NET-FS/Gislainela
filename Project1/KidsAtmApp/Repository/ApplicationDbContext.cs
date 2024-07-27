@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
    public ApplicationDbContext(){}
 
    public DbSet<UserAccount> UserAccounts { get; set; }
+   
       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
        if(!optionsBuilder.IsConfigured)
