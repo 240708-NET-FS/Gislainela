@@ -98,6 +98,7 @@ public class KidsAtmController
      
       try
       {
+        long.Parse(Pin);
         service.IsValidPin(Pin);
  
       }
@@ -107,8 +108,24 @@ public class KidsAtmController
        PressAnyKey();
        return;
       }
+
+      Console.WriteLine("Enter your AccountNumber:");
+      var accountnumber = Console.ReadLine();
      
-      UserAccount user = new UserAccount {FirstName = FName, LastName = LName};
+      try
+      {
+        long.Parse(accountnumber);
+        service.IsValidAccountNumber(accountnumber);
+ 
+      }
+      catch(Exception e)
+      {
+       Console.WriteLine(e.Message);
+       PressAnyKey();
+       return;
+      }
+     
+      UserAccount user = new UserAccount {FirstName = FName, LastName = LName, CardPin = long.Parse(Pin), AccountNUmber = long.Parse(accountnumber)};
       service.AddAccount(user);
     
       

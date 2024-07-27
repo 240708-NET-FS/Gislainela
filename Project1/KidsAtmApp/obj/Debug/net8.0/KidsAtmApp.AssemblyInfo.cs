@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KidsAtmApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7420fa218ff64f3bb771142fb9d36f271c94071b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2cc42bcbe24c2a96f51b20b74c92aa7ad324fdc1")]
 [assembly: System.Reflection.AssemblyProductAttribute("KidsAtmApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KidsAtmApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
