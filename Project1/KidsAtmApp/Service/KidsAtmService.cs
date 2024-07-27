@@ -90,7 +90,7 @@ namespace KidsAtmApp.Service{
       var account = repository.GetUserAccountByID(UserAccountId);
       if(account == null)
       {
-        throw new KeyNotFoundException("invalid id.");
+        throw new KeyNotFoundException("Invalid id.");
        }
 
        return account;
