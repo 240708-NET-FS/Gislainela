@@ -8,14 +8,15 @@ namespace KidsAtmApp.Repository{
     // other classes will implement the methods defined inside Interface.
    public class KidsAtmRepository : IKidsAtmRepository
    {
-
+     //create
    public void AddAccount(UserAccount userAccount)
    {
      using var context = new ApplicationDbContext();
      context.UserAccounts.Add(userAccount);
      context.SaveChanges();
    }
-
+    
+    //read
    //get all accounts from View account
    public List<UserAccount> GetAllAccounts()
    {
@@ -34,18 +35,15 @@ namespace KidsAtmApp.Repository{
       return context.UserAccounts!.FirstOrDefault(u=>u.UserAccountId == accountid);
   }
 
-  //update existing 
-  /// <summary>
-  /// update account by UserAccountId and parameter passing accountid
-  /// </summary>
-  /// <param name="accountid"></param>
+  //Update
    public void UpdateAccount(UserAccount userAccount)
    {
      using var context = new ApplicationDbContext(); //maybe use null here lets try first
      context.UserAccounts.Update(userAccount);
      context.SaveChanges();
    }
-
+    
+    //Delete
   public void DeleteAccount(int accountid)
   {
     using var context = new ApplicationDbContext();

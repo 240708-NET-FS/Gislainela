@@ -5,7 +5,9 @@ using Microsoft.IdentityModel.Tokens;
  
 namespace KidsAtmApp.Service{
 
- 
+     /// <summary>
+     ///  Service : handle business logic and Interfaces with Repository
+     /// </summary>
     public class KidsAtmService
     {
        private readonly IKidsAtmRepository repository;
@@ -27,12 +29,12 @@ namespace KidsAtmApp.Service{
     public bool IsValidPin(string input)
     {
 
-    //Check if the input is a valid integer
+      //Check if the input is a valid integer
       if (!int.TryParse(input, out int number))  //changed int to long
       {            
         throw new ArgumentException("Input must be a valid integer.", nameof(input));        
       }
-// Check if the integer has exactly 6 digits
+     // Check if the integer has exactly 6 digits
       if(input.Length != 6 || number < 100000 || number > 999999)
       {
         throw new ArgumentException("Input must be a 6-digit integer.", nameof(input));

@@ -27,7 +27,7 @@ public class KidsAtmController
         Console.WriteLine("  | 3 - Update Account                                           |");
         Console.WriteLine("  | 4 - Delete Account                                           |");
         Console.WriteLine("  | 5 - LogOut                                                   |");  
-        Console.WriteLine("*****************************************************************|");
+        Console.WriteLine("*****************************************************************");
      
      Console.WriteLine("Select valid option from menu: ");
      var userInput  = Console.ReadLine();
@@ -65,8 +65,12 @@ public class KidsAtmController
       Console.WriteLine("Press Any key to Continue...");
       Console.ReadLine();
     }
+
+    //Populating Database...and user interacting with console app
     private void AddAccount()
-    {
+    {  
+
+       //First Name
        Console.WriteLine("Enter your First Name:");
        var FName = Console.ReadLine();
  
@@ -80,7 +84,8 @@ public class KidsAtmController
        PressAnyKey();
        return ;
       }
-     
+      
+      // Last Name
       Console.WriteLine("Enter your Last Name: ");
       var LName = Console.ReadLine();
       try{
@@ -92,7 +97,25 @@ public class KidsAtmController
        PressAnyKey();
        return;
       }
+
+     //Card Number -digits
+      Console.WriteLine("Enter your Card Digits:");
+      var digits = Console.ReadLine();
+     
+      try
+      {
+        long.Parse(digits);
+        service.IsValidPin(digits);
  
+      }
+      catch(Exception e)
+      {
+       Console.WriteLine(e.Message);
+       PressAnyKey();
+       return;
+      }
+
+     //Pin
       Console.WriteLine("Enter your PIN:");
       var Pin = Console.ReadLine();
      
@@ -108,7 +131,8 @@ public class KidsAtmController
        PressAnyKey();
        return;
       }
-
+      
+      //AccountNumber
       Console.WriteLine("Enter your AccountNumber:");
       var accountnumber = Console.ReadLine();
      
@@ -116,6 +140,7 @@ public class KidsAtmController
       {
         long.Parse(accountnumber);
         service.IsValidAccountNumber(accountnumber);
+         Console.WriteLine("Account successfully Created :)");//check here
  
       }
       catch(Exception e)
@@ -124,8 +149,9 @@ public class KidsAtmController
        PressAnyKey();
        return;
       }
+      Console.ReadLine(); //keep going...
      
-      UserAccount user = new UserAccount {FirstName = FName, LastName = LName, CardPin = long.Parse(Pin), AccountNUmber = long.Parse(accountnumber)};
+      UserAccount user = new UserAccount {FirstName = FName, LastName = LName, CardDigits = long.Parse(digits), CardPin = long.Parse(Pin), AccountNUmber = long.Parse(accountnumber)};
       service.AddAccount(user);
     
       
@@ -144,7 +170,7 @@ public class KidsAtmController
         
       }
       catch(InvalidOperationException ex){
-           Console.WriteLine(ex.Message);
+         Console.WriteLine(ex.Message);
          }
       
          Console.ReadLine(); //keep going...
@@ -226,10 +252,8 @@ public class KidsAtmController
    private void LogOut()
    {
     Environment.Exit(0);
- 
+  
    }
- 
- 
 }
  
 }
