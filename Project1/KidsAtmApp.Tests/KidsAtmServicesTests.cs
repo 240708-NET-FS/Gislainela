@@ -17,14 +17,14 @@ public class KidsAtmServicesTests
     {   
 
         //arrange-set up
-        UserAccount user= new UserAccount{FirstName = "Gi", LastName = "Liu"};
+      
         var repository = new Mock<IKidsAtmRepository>();//Mock pass to interface : fake,  using the generics
         var service = new KidsAtmService(repository.Object); // calling the Mock or fake repository object
         //arrange/act and assert
         //act -> calling -> assert with throws when you want exc
       //  var exception = Assert.Throws<KeyNotFoundException>(() => service.GetUserAccountByID(4000));  
 
-        var exception = Record.Exception(()=> service.GetUserAccountByID(4000)); //invalid Id
+        var exception = Record.Exception(()=> service.GetUserAccountByID(4000)); //invalid Id 4000
 
        // Assert
         Assert.Equal("Invalid id.", exception.Message);
@@ -32,7 +32,7 @@ public class KidsAtmServicesTests
     }
 
     [Fact]
-    public void IsEmptyOrNullString_ShouldNotBeNullString()
+    public void IsEmptyOrNullString_ShouldNotBeNullString_notthrowexception()
     {
         //Arrange//Act//Assert
        // var stringValidation = new UserAccount
@@ -43,25 +43,24 @@ public class KidsAtmServicesTests
 
         var exception = Record.Exception(()=>service.IsEmptyOrNullString("Gilberto"));//valid
         Assert.Null(exception);//this is a valid input so no exception thrown.
-      //  repositoryFake.Verify(repoFake=>repoFake.IsEmptyOrNullString(It.Is<UserAccount>(u=>u.FirstName =="Gilberto")), Times.Once);
-
-    }
-
-
-
-
-    /* UserAccount user= new UserAccount{FirstName = "Gi", LastName = "Liu"};
-        var repository = new KidsAtmRepository();
-        var service = new KidsAtmService(repository);
-
-        service.AddAccount(user); */
-        
-   
-
-            
-    }
-
 
       
+
     }
+
+
+            
+  }
+
+   //just for studying:
+   //  UserAccount user= new UserAccount{FirstName = "Gi", LastName = "Liu"};
+    // UserAccount user= new UserAccount{FirstName = "Gi", LastName = "Liu"};
+    //    var repository = new KidsAtmRepository();
+     //   var service = new KidsAtmService(repository);
+
+      //  service.AddAccount(user); 
+        
+
+      
+}
 

@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace KidsAtmApp.Service{
 
      /// <summary>
-     ///  Service : handle business logic and Interfaces with Repository
+     ///  Service : handle business logic, validation logic and Interfaces with Repository
      /// </summary>
     public class KidsAtmService
     {
@@ -26,7 +26,7 @@ namespace KidsAtmApp.Service{
           return true;
        }
  
-    public bool IsValidPin(string input)
+    public bool IsValidPin(string input)  
     {
 
       //Check if the input is a valid integer
@@ -35,11 +35,11 @@ namespace KidsAtmApp.Service{
         throw new ArgumentException("Input must be a valid integer.", nameof(input));        
       }
      // Check if the integer has exactly 6 digits
-      if(input.Length != 6 || number < 100000 || number > 999999)
+      if(input.Length != 6 || number < 100000 || number > 999999)  
       {
-        throw new ArgumentException("Input must be a 6-digit integer.", nameof(input));
+        throw new ArgumentException("Input must be a 6-digit integer.", nameof(input)); 
       }
-      return true;
+      return true;  
     } 
     
 
@@ -98,8 +98,8 @@ namespace KidsAtmApp.Service{
        return account;
     }
    
-    //update Not working
-    public void UpdateAccount(UserAccount userAccount) //before was like addacount only returning repository
+    //If is null can not update by Id.
+    public void UpdateAccount(UserAccount userAccount) 
     {
       if(string.IsNullOrEmpty(userAccount.FirstName) || string.IsNullOrEmpty(userAccount.LastName))
       {
@@ -109,7 +109,7 @@ namespace KidsAtmApp.Service{
       repository.UpdateAccount(userAccount);
     }
 
-
+     //if account does not exist throw exception
      public void DeleteAccount(int accountid)
      {
        var userAccount = repository.GetUserAccountByID(accountid); 

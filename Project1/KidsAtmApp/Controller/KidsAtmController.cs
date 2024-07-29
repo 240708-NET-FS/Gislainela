@@ -7,7 +7,9 @@ namespace KidsAtmApp.Controller{
  
 public class KidsAtmController
 {
- 
+     //using dependency injection promotes a design philosophy where objects rely on well defined interfaces 
+     //rather than specific implementations.Promotes more: modular, flexible and maintanable codebase.
+     
     //Variable for dependency injection
     private readonly KidsAtmService service;
  
@@ -76,7 +78,7 @@ public class KidsAtmController
  
       try
       {
-        service.IsEmptyOrNullString(FName);
+        service.IsEmptyOrNullString(FName!);
       }
       catch(Exception e)
       {
@@ -89,7 +91,7 @@ public class KidsAtmController
       Console.WriteLine("Enter your Last Name: ");
       var LName = Console.ReadLine();
       try{
-        service.IsEmptyOrNullString(LName);
+        service.IsEmptyOrNullString(LName!);
       }
       catch(Exception e)
       {
@@ -101,11 +103,11 @@ public class KidsAtmController
      //Card Number -digits
       Console.WriteLine("Enter your Card Digits:");
       var digits = Console.ReadLine();
-     
+      long.Parse(digits!);
       try
       {
-        long.Parse(digits);
-        service.IsValidPin(digits);
+        //long.Parse(digits);
+        service.IsValidPin(digits!);
  
       }
       catch(Exception e)
@@ -113,16 +115,16 @@ public class KidsAtmController
        Console.WriteLine(e.Message);
        PressAnyKey();
        return;
-      }
+      } 
 
      //Pin
       Console.WriteLine("Enter your PIN:");
       var Pin = Console.ReadLine();
-     
+      long.Parse(Pin!);
       try
       {
-        long.Parse(Pin);
-        service.IsValidPin(Pin);
+        //long.Parse(Pin);
+        service.IsValidPin(Pin!);
  
       }
       catch(Exception e)
@@ -135,12 +137,13 @@ public class KidsAtmController
       //AccountNumber
       Console.WriteLine("Enter your AccountNumber:");
       var accountnumber = Console.ReadLine();
+      long.Parse(accountnumber!);
      
       try
       {
-        long.Parse(accountnumber);
-        service.IsValidAccountNumber(accountnumber);
-         Console.WriteLine("Account successfully Created :)");//check here
+       // long.Parse(accountnumber);
+        service.IsValidAccountNumber(accountnumber!);
+        Console.WriteLine("Account successfully Created :)");//check here
  
       }
       catch(Exception e)
@@ -151,7 +154,7 @@ public class KidsAtmController
       }
       Console.ReadLine(); //keep going...
      
-      UserAccount user = new UserAccount {FirstName = FName, LastName = LName, CardDigits = long.Parse(digits), CardPin = long.Parse(Pin), AccountNUmber = long.Parse(accountnumber)};
+      UserAccount user = new UserAccount {FirstName = FName, LastName = LName, CardDigits = long.Parse(digits!), CardPin = long.Parse(Pin!), AccountNUmber = long.Parse(accountnumber!)};
       service.AddAccount(user);
     
       

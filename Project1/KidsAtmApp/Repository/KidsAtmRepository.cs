@@ -6,6 +6,7 @@ namespace KidsAtmApp.Repository{
 
  
     // other classes will implement the methods defined inside Interface.
+    //Repository is responsible for data access logic.
    public class KidsAtmRepository : IKidsAtmRepository
    {
      //create
