@@ -11,6 +11,9 @@ namespace KidsAtmApp.Service{
     public class KidsAtmService
     {
        private readonly IKidsAtmRepository repository;
+
+      //Constructor KidsAtmService used for Dependency Injection.
+      //IKidsAtmRepository Interface used for Unit test purpose.
        public KidsAtmService(IKidsAtmRepository kidsAtmRepository)
        {
           repository  = kidsAtmRepository;
